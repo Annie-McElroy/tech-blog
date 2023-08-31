@@ -4,19 +4,19 @@ const submitCommentBtn = document.querySelector('#submit-comment');
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
-    const commentText = document.querySelector('#comment-text').value.trim();
+    const text = document.querySelector('#comment-text').value.trim();
 
-    const postId = window.location.toString().split('/')[
+    const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
 
-    console.log(postId);
+    console.log(post_id);
 
-    if (commentText) {
+    if (text && post_id) {
         const response = await fetch (`/api/comments`,
         {
             method: 'POST',
-            body: JSON.stringify({ commentText}),
+            body: JSON.stringify({ post_id, text}),
             headers: {
                 'Content-Type': 'application/json',
             },

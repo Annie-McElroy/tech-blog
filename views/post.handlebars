@@ -17,7 +17,7 @@
             <h4>Comments</h4>
         </div>
         {{#each comments as |comment|}}
-        <div>
+        <div class="border border-dark border-1 rounded mb-2">
             <p>{{comment.text}}</p>
             <p>Written by {{comment.user.username}} on {{format_date comment.date_created}}</p>
         </div>
@@ -28,11 +28,11 @@
     <div>
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#comment-form">Add Comment</button>
     </div>
-    <div class="mb-3 collapse" id="comment-form">
+    <form class="mb-3 collapse" id="comment-form">
         <label for="comment-context" class="form-label">Comment Context</label>
         <textarea class="form-control" id="comment-text" rows="3"></textarea>
         <button type="submit" class="btn btn-secondary" id="submit-comment">Submit Comment</button>
-    </div>
+    </form>
 </div>
 
 <script src="/js/comment.js"></script>
