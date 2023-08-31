@@ -54,32 +54,23 @@ router.get("/post/:id", withAuth, async (req, res) => {
     }
 });
 
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req,res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password']},
-            include: [
-                {
-                    model: Post,
-                    include: [User],
-                },
-                {
-                    model: Comment,
-                },
-            ],
+            attributes: { exclude: ['password'] },
+            include: [{ model: Post }],
         });
 
-        const user = userData.get({ plain: true});
-        console.log(user);
+        const user = userData.get({ plain: true });
 
         res.render('dashboard', {
             ...user,
             logged_in: true,
-        })
+        });
     } catch (err) {
         res.status(500).json(err);
     }
-});
+})
 
 router.get('/login', async (req, res) => {
     if (req.session.logged_in) {
