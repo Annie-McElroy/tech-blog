@@ -76,24 +76,14 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
         
         const posts = postData.map((post) => post.get({ plain: true }));
-
+        
         console.log(posts)
         
         res.render('dashboard', {
-            posts,
+            ...posts,
             logged_in: true,
         });
-        // const userData = await User.findByPk(req.session.userId, {
-        //     attributes: { exclude: ['password'] },
-        //     include: [{ model: Post }],
-        // });
 
-        // const user = userData.get({ plain: true });
-
-        // res.render('dashboard', {
-        //     ...user,
-        //     logged_in: true,
-        // });
     } catch (err) {
         console.log(err)
         res.redirect('/')

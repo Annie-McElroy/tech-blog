@@ -1,19 +1,13 @@
-{{#if post.length}}
 <div class="container-fluid">
-    {{#each posts as |post|}}
-        <div class="row card shadow p-3 mb-5 bg-body rounded">
-            <div class="card-header pt-2 px-3 mb-2">
-                <div>
-                    <h3><a href="/post/{{post.id}}">{{post.title}}</a></h3>
-                    <p class="text-end">Created On {{format_date post.date_created}}</p>
-                </div>
-                <div>
-                </div>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{post.text}}</p>
-            </div>
+    <form>
+        <div class="mb-3">
+            <label for="post-title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="post-title" placeholder="Post Title Here">
         </div>
-    {{/each}}
+        <div class="mb-3">
+            <label for="post-context" class="form-label">Post Context</label>
+            <textarea class="form-control" id="post-context" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-post">Submit</button>
+    </form>
 </div>
-{{/if}}
