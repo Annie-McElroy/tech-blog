@@ -56,38 +56,64 @@ router.get("/post/:id", withAuth, async (req, res) => {
 
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        const postData = await Post.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-            attributes: [
-                'id',
-                'text',
-                'title',
-                'date_created',
-            ],
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
             include: [
                 {
-                    model: User,
-                    attribute: ['username']
-                }
-            ]
+                    model: Post,
+                    attributes: [
+                        'id',
+                        'text',
+                        'title',
+                        'date_created',
+                    ],
+                },
+            ],
         });
 
-        
-        const posts = postData.map((post) => post.get({ plain: true }));
-        
-        console.log(posts)
-        
+        const user = userData.get({ plain: true });
+
         res.render('dashboard', {
-            ...posts,
+            ...user,
             logged_in: true,
         });
+        // const postData = await Post.findAll({
+        //     where: {
+        //         user_id: req.session.user_id
+        //     },
+        //     attributes: [
+        //         'id',
+        //         'text',
+        //         'title',
+        //         'date_created',
+        //     ],
+        //     include: [
+        //         {
+        //             model: User,
+        //             attribute: ['username']
+        //         }
+        //     ]
+        // });
+
+
+        // const posts = postData.map((post) => post.get({ plain: true }));
+
+        // console.log(posts)
+
+        // res.render('dashboard', {
+        //     ...posts,
+        //     logged_in: true,
+        // });
 
     } catch (err) {
-        console.log(err)
-        res.redirect('/')
+        res.status(500).json(err)
     }
+});
+
+router.get('/create', async (req, res) => {
+    res.render('create', {
+        logged_in: true,
+    });
 })
 
 router.get('/login', async (req, res) => {

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-auto">
-        <h2>Welcome, {{user.username}}!</h2>
+        <h2>Welcome, {{username}}!</h2>
     </div>
 </div>
 
@@ -10,10 +10,8 @@
         <div class="row card shadow p-3 mb-5 bg-body rounded">
             <div class="card-header pt-2 px-3 mb-2">
                 <div>
-                    <h3><a href="/post/{{post.id}}">{{post.title}}</a></h3>
+                    <h3><a href="/update/{{post.id}}">{{post.title}}</a></h3>
                     <p class="text-end">Created On {{format_date post.date_created}}</p>
-                </div>
-                <div>
                 </div>
             </div>
             <div class="card-body">
