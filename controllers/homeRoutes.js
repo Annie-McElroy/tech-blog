@@ -31,7 +31,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
             include: [
                 {
                     model: User,
-                    attributes:['username'],
+                    attributes: ['username'],
                 },
                 {
                     model: Comment,
@@ -42,9 +42,9 @@ router.get("/post/:id", withAuth, async (req, res) => {
                 },
             ],
         });
-    
+
         const post = postData.get({ plain: true });
-    
+
         res.render('post', {
             ...post,
             logged_in: req.session.logged_in
@@ -54,21 +54,49 @@ router.get("/post/:id", withAuth, async (req, res) => {
     }
 });
 
-router.get('/dashboard', withAuth, async (req,res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] },
-            include: [{ model: Post }],
+        const postData = await Post.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            attributes: [
+                'id',
+                'text',
+                'title',
+                'date_created',
+            ],
+            include: [
+                {
+                    model: User,
+                    attribute: ['username']
+                }
+            ]
         });
 
-        const user = userData.get({ plain: true });
+        
+        const posts = postData.map((post) => post.get({ plain: true }));
 
+        console.log(posts)
+        
         res.render('dashboard', {
-            ...user,
+            posts,
             logged_in: true,
         });
+        // const userData = await User.findByPk(req.session.userId, {
+        //     attributes: { exclude: ['password'] },
+        //     include: [{ model: Post }],
+        // });
+
+        // const user = userData.get({ plain: true });
+
+        // res.render('dashboard', {
+        //     ...user,
+        //     logged_in: true,
+        // });
     } catch (err) {
-        res.status(500).json(err);
+        console.log(err)
+        res.redirect('/')
     }
 })
 

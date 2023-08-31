@@ -32,6 +32,8 @@ const sess = {
 
 app.use(session(sess));
 
+app.use(session(sess));
+
 // Run template engine as handlebars
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
