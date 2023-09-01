@@ -1,5 +1,4 @@
 // Update existing post
-
 const updatePost = async (event) => {
     event.preventDefault();
 
@@ -30,6 +29,27 @@ const updatePost = async (event) => {
     };
 };
 
+// De;ete existing post
+const deletePost = async (event) => {
+    if (event.target.hasAttribute('data-id')) {
+        const id = event.target.getAttribute('data-id');
+
+        const response = await fetch(`/api/posts/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert('Failed to delete post!');
+        }
+    }
+};
+
 document
     .querySelector('#update-post')
     .addEventListener('submit', updatePost);
+
+document
+    .querySelector('#delete-post')
+    .addEventListener('click', deletePost);
