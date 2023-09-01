@@ -19,26 +19,27 @@ To access the website, please go to  [The Tech Blog](https://am-tech-blog-7b700e
 
 Once there, you will be able to see the current blog posts and who they are created by: 
 
-![Screenshot of tech blog homepage with current blog post]()
+![Screenshot of tech blog homepage with current blog post](./public/images/tech-blog-homepage.png)
 
 If you try to access any of the postings or the Dashboard from the navbar you will be directed to login first. If you have not logged in before, you may sign up with a username and password.
 
-![Screenshot of tech blog login and signup page]()
+![Screenshot of tech blog login and signup page](./public/images/tech-blog-login-signup.png)
 
 Once you have logged in, you will be directed to your personal Dashboard which will show if you have any post published and a button to create a new post.
 
-![Screenshot of tech blog dashboard page]()
+![Screenshot of tech blog dashboard page](./public/images/tech-blog-dashboard.png)
 
 Creating a new post will allow that post to appear not only in the individual's dashboard but also on the homepage.
-![Screenshot of tech blog create post page]()
+
+![Screenshot of tech blog create post page](./public/images/tech-blog-create-post.png)
 
 You may also return back to the Home page and access an existing post by selecting the post title and then add a comment to the post.
 
-![Screenshot of tech blog individual post page with add comment form showing]()
+![Screenshot of tech blog individual post page with add comment form showing](./public/images/tech-blog-comments.png)
 
 Back on your Dashboard if you have an existing post you may go in and update or delete that posting.
 
-![Screenshot of tech blog ]()
+![Screenshot of tech blog update or delete post page](./public/images/tech-blog-edit-post.png)
 
 ## License
 
