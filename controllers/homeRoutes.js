@@ -77,34 +77,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
             ...user,
             logged_in: true,
         });
-        // const postData = await Post.findAll({
-        //     where: {
-        //         user_id: req.session.user_id
-        //     },
-        //     attributes: [
-        //         'id',
-        //         'text',
-        //         'title',
-        //         'date_created',
-        //     ],
-        //     include: [
-        //         {
-        //             model: User,
-        //             attribute: ['username']
-        //         }
-        //     ]
-        // });
-
-
-        // const posts = postData.map((post) => post.get({ plain: true }));
-
-        // console.log(posts)
-
-        // res.render('dashboard', {
-        //     ...posts,
-        //     logged_in: true,
-        // });
-
     } catch (err) {
         res.status(500).json(err)
     }
@@ -114,6 +86,28 @@ router.get('/create', async (req, res) => {
     res.render('create', {
         logged_in: true,
     });
+});
+
+router.get('/update/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attribute: ['username'],
+                },
+            ],
+        });
+
+        const post = postData.get({ plain: true });
+
+        res.render('update', {
+            ...post,
+            logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 })
 
 router.get('/login', async (req, res) => {
